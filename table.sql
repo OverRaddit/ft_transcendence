@@ -5,7 +5,7 @@
 -- Dumped from database version 15.2
 -- Dumped by pg_dump version 15.2
 
--- Started on 2023-03-30 20:20:54 KST
+-- Started on 2023-04-17 17:39:44 KST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -30,96 +30,25 @@ SET default_table_access_method = heap;
 CREATE TABLE public."User" (
     id integer NOT NULL,
     intraid character varying(50) NOT NULL,
-    avatar character varying(50),
     rating integer NOT NULL,
     wincount integer DEFAULT 0 NOT NULL,
     losecount integer DEFAULT 0 NOT NULL,
     email character varying(50) NOT NULL,
-    isotp boolean DEFAULT false NOT NULL
+    isotp boolean DEFAULT false NOT NULL,
+    avatar character varying(1000),
+    nickname character varying(100)
 );
 
 
 ALTER TABLE public."User" OWNER TO postgres;
 
 --
--- TOC entry 3640 (class 0 OID 0)
+-- TOC entry 3648 (class 0 OID 0)
 -- Dependencies: 215
 -- Name: TABLE "User"; Type: COMMENT; Schema: public; Owner: postgres
 --
 
 COMMENT ON TABLE public."User" IS '유저';
-
-
---
--- TOC entry 3641 (class 0 OID 0)
--- Dependencies: 215
--- Name: COLUMN "User".id; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public."User".id IS '유저 id';
-
-
---
--- TOC entry 3642 (class 0 OID 0)
--- Dependencies: 215
--- Name: COLUMN "User".intraid; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public."User".intraid IS '인트라 id';
-
-
---
--- TOC entry 3643 (class 0 OID 0)
--- Dependencies: 215
--- Name: COLUMN "User".avatar; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public."User".avatar IS '아바타 이미지 url';
-
-
---
--- TOC entry 3644 (class 0 OID 0)
--- Dependencies: 215
--- Name: COLUMN "User".rating; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public."User".rating IS '랭킹 점수';
-
-
---
--- TOC entry 3645 (class 0 OID 0)
--- Dependencies: 215
--- Name: COLUMN "User".wincount; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public."User".wincount IS '승';
-
-
---
--- TOC entry 3646 (class 0 OID 0)
--- Dependencies: 215
--- Name: COLUMN "User".losecount; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public."User".losecount IS '패';
-
-
---
--- TOC entry 3647 (class 0 OID 0)
--- Dependencies: 215
--- Name: COLUMN "User".email; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public."User".email IS '이메일';
-
-
---
--- TOC entry 3648 (class 0 OID 0)
--- Dependencies: 215
--- Name: COLUMN "User".isotp; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public."User".isotp IS 'authentic?';
 
 
 --
@@ -154,51 +83,6 @@ CREATE TABLE public.channel (
 ALTER TABLE public.channel OWNER TO postgres;
 
 --
--- TOC entry 3649 (class 0 OID 0)
--- Dependencies: 217
--- Name: COLUMN channel.id; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.channel.id IS '채널 아이디';
-
-
---
--- TOC entry 3650 (class 0 OID 0)
--- Dependencies: 217
--- Name: COLUMN channel.kind; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.channel.kind IS '종류';
-
-
---
--- TOC entry 3651 (class 0 OID 0)
--- Dependencies: 217
--- Name: COLUMN channel.owner; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.channel.owner IS '방장';
-
-
---
--- TOC entry 3652 (class 0 OID 0)
--- Dependencies: 217
--- Name: COLUMN channel.roomname; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.channel.roomname IS '방 제목';
-
-
---
--- TOC entry 3653 (class 0 OID 0)
--- Dependencies: 217
--- Name: COLUMN channel.roompassword; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.channel.roompassword IS '방 비밀번호';
-
-
---
 -- TOC entry 216 (class 1259 OID 16415)
 -- Name: channel_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -227,24 +111,6 @@ CREATE TABLE public.channelblacklist (
 ALTER TABLE public.channelblacklist OWNER TO postgres;
 
 --
--- TOC entry 3654 (class 0 OID 0)
--- Dependencies: 220
--- Name: COLUMN channelblacklist."channelId"; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.channelblacklist."channelId" IS '채널 아이디';
-
-
---
--- TOC entry 3655 (class 0 OID 0)
--- Dependencies: 220
--- Name: COLUMN channelblacklist.userid; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.channelblacklist.userid IS '유저 아이디';
-
-
---
 -- TOC entry 221 (class 1259 OID 16457)
 -- Name: channelinfo; Type: TABLE; Schema: public; Owner: postgres
 --
@@ -260,42 +126,6 @@ CREATE TABLE public.channelinfo (
 ALTER TABLE public.channelinfo OWNER TO postgres;
 
 --
--- TOC entry 3656 (class 0 OID 0)
--- Dependencies: 221
--- Name: COLUMN channelinfo.chid; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.channelinfo.chid IS '채널 아이디';
-
-
---
--- TOC entry 3657 (class 0 OID 0)
--- Dependencies: 221
--- Name: COLUMN channelinfo.userid; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.channelinfo.userid IS '유저 아이디';
-
-
---
--- TOC entry 3658 (class 0 OID 0)
--- Dependencies: 221
--- Name: COLUMN channelinfo.isowner; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.channelinfo.isowner IS '방장인가?';
-
-
---
--- TOC entry 3659 (class 0 OID 0)
--- Dependencies: 221
--- Name: COLUMN channelinfo.isadmin; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.channelinfo.isadmin IS '관리자인가?';
-
-
---
 -- TOC entry 222 (class 1259 OID 16472)
 -- Name: friendlist; Type: TABLE; Schema: public; Owner: postgres
 --
@@ -307,24 +137,6 @@ CREATE TABLE public.friendlist (
 
 
 ALTER TABLE public.friendlist OWNER TO postgres;
-
---
--- TOC entry 3660 (class 0 OID 0)
--- Dependencies: 222
--- Name: COLUMN friendlist."userId1"; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.friendlist."userId1" IS '유저 아이디1';
-
-
---
--- TOC entry 3661 (class 0 OID 0)
--- Dependencies: 222
--- Name: COLUMN friendlist."userId2"; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.friendlist."userId2" IS '유저 아이디2';
-
 
 --
 -- TOC entry 219 (class 1259 OID 16427)
@@ -345,66 +157,12 @@ CREATE TABLE public.matchhistory (
 ALTER TABLE public.matchhistory OWNER TO postgres;
 
 --
--- TOC entry 3662 (class 0 OID 0)
+-- TOC entry 3649 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: TABLE matchhistory; Type: COMMENT; Schema: public; Owner: postgres
 --
 
 COMMENT ON TABLE public.matchhistory IS '매칭 전적';
-
-
---
--- TOC entry 3663 (class 0 OID 0)
--- Dependencies: 219
--- Name: COLUMN matchhistory.winnerid; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.matchhistory.winnerid IS '승자';
-
-
---
--- TOC entry 3664 (class 0 OID 0)
--- Dependencies: 219
--- Name: COLUMN matchhistory.loserid; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.matchhistory.loserid IS '패자';
-
-
---
--- TOC entry 3665 (class 0 OID 0)
--- Dependencies: 219
--- Name: COLUMN matchhistory.status; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.matchhistory.status IS '상태';
-
-
---
--- TOC entry 3666 (class 0 OID 0)
--- Dependencies: 219
--- Name: COLUMN matchhistory.mapnumber; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.matchhistory.mapnumber IS '맵';
-
-
---
--- TOC entry 3667 (class 0 OID 0)
--- Dependencies: 219
--- Name: COLUMN matchhistory.winscore; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.matchhistory.winscore IS '승리 스코어';
-
-
---
--- TOC entry 3668 (class 0 OID 0)
--- Dependencies: 219
--- Name: COLUMN matchhistory.losescore; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.matchhistory.losescore IS '패배 스코어';
 
 
 --
@@ -436,24 +194,6 @@ CREATE TABLE public.userblacklist (
 ALTER TABLE public.userblacklist OWNER TO postgres;
 
 --
--- TOC entry 3669 (class 0 OID 0)
--- Dependencies: 223
--- Name: COLUMN userblacklist."userId1"; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.userblacklist."userId1" IS '유저 아이디1';
-
-
---
--- TOC entry 3670 (class 0 OID 0)
--- Dependencies: 223
--- Name: COLUMN userblacklist."userId2"; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON COLUMN public.userblacklist."userId2" IS '유저 아이디2';
-
-
---
 -- TOC entry 3469 (class 2606 OID 16414)
 -- Name: User User_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
@@ -463,7 +203,7 @@ ALTER TABLE ONLY public."User"
 
 
 --
--- TOC entry 3471 (class 2606 OID 16420)
+-- TOC entry 3472 (class 2606 OID 16420)
 -- Name: channel channel_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -472,7 +212,7 @@ ALTER TABLE ONLY public.channel
 
 
 --
--- TOC entry 3475 (class 2606 OID 16446)
+-- TOC entry 3480 (class 2606 OID 16446)
 -- Name: channelblacklist channelblacklist_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -481,7 +221,7 @@ ALTER TABLE ONLY public.channelblacklist
 
 
 --
--- TOC entry 3477 (class 2606 OID 16461)
+-- TOC entry 3482 (class 2606 OID 16461)
 -- Name: channelinfo channelinfo_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -490,7 +230,7 @@ ALTER TABLE ONLY public.channelinfo
 
 
 --
--- TOC entry 3473 (class 2606 OID 16431)
+-- TOC entry 3475 (class 2606 OID 16431)
 -- Name: matchhistory matchhistory_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -499,7 +239,7 @@ ALTER TABLE ONLY public.matchhistory
 
 
 --
--- TOC entry 3479 (class 2606 OID 16476)
+-- TOC entry 3485 (class 2606 OID 16476)
 -- Name: friendlist user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -508,7 +248,7 @@ ALTER TABLE ONLY public.friendlist
 
 
 --
--- TOC entry 3481 (class 2606 OID 16494)
+-- TOC entry 3488 (class 2606 OID 16494)
 -- Name: userblacklist userblacklist_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -517,105 +257,169 @@ ALTER TABLE ONLY public.userblacklist
 
 
 --
--- TOC entry 3482 (class 2606 OID 16421)
--- Name: channel fk_channel_owner_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 3477 (class 1259 OID 16542)
+-- Name: IDX_3ec99dcca8329e104d570ed621; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "IDX_3ec99dcca8329e104d570ed621" ON public.channelblacklist USING btree ("channelId");
+
+
+--
+-- TOC entry 3478 (class 1259 OID 16543)
+-- Name: IDX_a8bbfacb9bc35b477e6029fb1e; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "IDX_a8bbfacb9bc35b477e6029fb1e" ON public.channelblacklist USING btree (userid);
+
+
+--
+-- TOC entry 3470 (class 1259 OID 16540)
+-- Name: User_pkey2; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX "User_pkey2" ON public."User" USING btree (id);
+
+
+--
+-- TOC entry 3473 (class 1259 OID 16541)
+-- Name: channel_pkey2; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX channel_pkey2 ON public.channel USING btree (id);
+
+
+--
+-- TOC entry 3483 (class 1259 OID 16536)
+-- Name: channelinfo_pkey2; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX channelinfo_pkey2 ON public.channelinfo USING btree (chid, userid);
+
+
+--
+-- TOC entry 3476 (class 1259 OID 16538)
+-- Name: matchhistory_pkey2; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX matchhistory_pkey2 ON public.matchhistory USING btree (id);
+
+
+--
+-- TOC entry 3486 (class 1259 OID 16537)
+-- Name: user_pkey2; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX user_pkey2 ON public.friendlist USING btree ("userId1", "userId2");
+
+
+--
+-- TOC entry 3489 (class 1259 OID 16539)
+-- Name: userblacklist_pkey3; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX userblacklist_pkey3 ON public.userblacklist USING btree ("userId1", "userId2");
+
+
+--
+-- TOC entry 3497 (class 2606 OID 16554)
+-- Name: friendlist FK_2b6064e6cacb092ce78da35d7d9; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.friendlist
+    ADD CONSTRAINT "FK_2b6064e6cacb092ce78da35d7d9" FOREIGN KEY ("userId1") REFERENCES public."User"(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3493 (class 2606 OID 16589)
+-- Name: channelblacklist FK_3ec99dcca8329e104d570ed6210; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.channelblacklist
+    ADD CONSTRAINT "FK_3ec99dcca8329e104d570ed6210" FOREIGN KEY ("channelId") REFERENCES public.channel(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3490 (class 2606 OID 16584)
+-- Name: channel FK_43b026a9ae31a105029f4a12580; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.channel
-    ADD CONSTRAINT fk_channel_owner_user_id FOREIGN KEY (owner) REFERENCES public."User"(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT "FK_43b026a9ae31a105029f4a12580" FOREIGN KEY (owner) REFERENCES public."User"(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
 
 
 --
--- TOC entry 3485 (class 2606 OID 16447)
--- Name: channelblacklist fk_channelblacklist_id_channel_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.channelblacklist
-    ADD CONSTRAINT fk_channelblacklist_id_channel_id FOREIGN KEY ("channelId") REFERENCES public.channel(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
-
-
---
--- TOC entry 3486 (class 2606 OID 16452)
--- Name: channelblacklist fk_channelblacklist_userid_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.channelblacklist
-    ADD CONSTRAINT fk_channelblacklist_userid_user_id FOREIGN KEY (userid) REFERENCES public."User"(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
-
-
---
--- TOC entry 3487 (class 2606 OID 16462)
--- Name: channelinfo fk_channelinfo_chid_channel_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.channelinfo
-    ADD CONSTRAINT fk_channelinfo_chid_channel_id FOREIGN KEY (chid) REFERENCES public.channel(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
-
-
---
--- TOC entry 3488 (class 2606 OID 16467)
--- Name: channelinfo fk_channelinfo_userid_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.channelinfo
-    ADD CONSTRAINT fk_channelinfo_userid_user_id FOREIGN KEY (userid) REFERENCES public."User"(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
-
-
---
--- TOC entry 3483 (class 2606 OID 16437)
--- Name: matchhistory fk_matchhistory_loserid_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.matchhistory
-    ADD CONSTRAINT fk_matchhistory_loserid_user_id FOREIGN KEY (loserid) REFERENCES public."User"(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
-
-
---
--- TOC entry 3484 (class 2606 OID 16432)
--- Name: matchhistory fk_matchhistory_winnerid_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.matchhistory
-    ADD CONSTRAINT fk_matchhistory_winnerid_user_id FOREIGN KEY (winnerid) REFERENCES public."User"(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
-
-
---
--- TOC entry 3489 (class 2606 OID 16477)
--- Name: friendlist fk_userid1_userid1_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.friendlist
-    ADD CONSTRAINT fk_userid1_userid1_user_id FOREIGN KEY ("userId1") REFERENCES public."User"(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
-
-
---
--- TOC entry 3491 (class 2606 OID 16495)
--- Name: userblacklist fk_userid1_userid1_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 3499 (class 2606 OID 16574)
+-- Name: userblacklist FK_61fd6b493f2ee7489efdf07de83; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.userblacklist
-    ADD CONSTRAINT fk_userid1_userid1_user_id FOREIGN KEY ("userId1") REFERENCES public."User"(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT "FK_61fd6b493f2ee7489efdf07de83" FOREIGN KEY ("userId1") REFERENCES public."User"(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
 
 
 --
--- TOC entry 3490 (class 2606 OID 16482)
--- Name: friendlist fk_userid1_userid2_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 3498 (class 2606 OID 16559)
+-- Name: friendlist FK_8250c9296ef141482b2f74cd466; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.friendlist
-    ADD CONSTRAINT fk_userid1_userid2_user_id FOREIGN KEY ("userId2") REFERENCES public."User"(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT "FK_8250c9296ef141482b2f74cd466" FOREIGN KEY ("userId2") REFERENCES public."User"(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
 
 
 --
--- TOC entry 3492 (class 2606 OID 16500)
--- Name: userblacklist fk_userid1_userid2_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 3491 (class 2606 OID 16564)
+-- Name: matchhistory FK_9558dc78fb5306eebe4361304b2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.matchhistory
+    ADD CONSTRAINT "FK_9558dc78fb5306eebe4361304b2" FOREIGN KEY (loserid) REFERENCES public."User"(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3494 (class 2606 OID 16594)
+-- Name: channelblacklist FK_a8bbfacb9bc35b477e6029fb1e5; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.channelblacklist
+    ADD CONSTRAINT "FK_a8bbfacb9bc35b477e6029fb1e5" FOREIGN KEY (userid) REFERENCES public."User"(id);
+
+
+--
+-- TOC entry 3492 (class 2606 OID 16569)
+-- Name: matchhistory FK_bdc276b321dadf3efea14463adb; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.matchhistory
+    ADD CONSTRAINT "FK_bdc276b321dadf3efea14463adb" FOREIGN KEY (winnerid) REFERENCES public."User"(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3500 (class 2606 OID 16579)
+-- Name: userblacklist FK_cacfa8569f2be2ebe97f2572cd2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.userblacklist
-    ADD CONSTRAINT fk_userid1_userid2_user_id FOREIGN KEY ("userId2") REFERENCES public."User"(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT "FK_cacfa8569f2be2ebe97f2572cd2" FOREIGN KEY ("userId2") REFERENCES public."User"(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
 
 
--- Completed on 2023-03-30 20:20:54 KST
+--
+-- TOC entry 3495 (class 2606 OID 16549)
+-- Name: channelinfo FK_e8383ffe965934922ac82c70c52; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.channelinfo
+    ADD CONSTRAINT "FK_e8383ffe965934922ac82c70c52" FOREIGN KEY (userid) REFERENCES public."User"(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 3496 (class 2606 OID 16544)
+-- Name: channelinfo FK_f38ea7cc1ef2d5bacd45fd2230a; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.channelinfo
+    ADD CONSTRAINT "FK_f38ea7cc1ef2d5bacd45fd2230a" FOREIGN KEY (chid) REFERENCES public.channel(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+-- Completed on 2023-04-17 17:39:44 KST
 
 --
 -- PostgreSQL database dump complete
