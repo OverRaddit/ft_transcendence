@@ -38,7 +38,8 @@ frontend		:
 				@cd ./srcs ; docker-compose exec frontend bash ; cd ..
 
 postgres		:
-				@cd ./srcs ; docker-compose exec postgres bash ; cd ..
+#				@cd ./srcs ; docker-compose exec postgres bash ; cd ..
+				docker exec -it postgres psql -U postgres -d ft_db
 
 fclean		:
 				@echo $(YELLOW) "Removing All Docker things..." $(EOC)

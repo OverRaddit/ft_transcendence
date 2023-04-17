@@ -27,11 +27,12 @@ services:
   nest:
     container_name: nest
     build: ./backend
-    # ports:
-    #   - "3000:3000"
-    expose:
-      - "3000"
-      - "8000"
+    ports:
+      - "3000:3000"
+      - "8000:8000"
+    # expose:
+    #   - "3000"
+    #   - "8000"
     depends_on:
       - react
       - postgres
