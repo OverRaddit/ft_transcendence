@@ -1,0 +1,58 @@
+version: '3.2'
+#========================================
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: ft_db
+
+    # temp setting...
+    tty: true # 나중에 지울 것.
+    # ports:
+    #   - "5432:5432"
+    expose:
+      - "5432"
+    volumes:
+      - type: bind
+        source: ./table.sql
+        target: /docker-entrypoint-initdb.d/table.sql
+    # env_file:
+    #   - ./.env
+    networks:
+      - intra
+  nest:
+    container_name: nest
+    build: ./backend
+    # ports:
+    #   - "3000:3000"
+    expose:
+      - "3000"
+      - "8000"
+    depends_on:
+      - react
+      - postgres
+    tty: true
+    networks:
+      - intra
+  react:
+    container_name: react
+    build: ./frontend
+    ports:
+      - "3001:3001"
+    # expose:
+    #   - "3001"
+    depends_on:
+      - postgres
+    tty: true
+    networks:
+      - intra
+volumes:
+  db_volume:
+networks:
+  intra:
+    driver: bridge
+#========================================
