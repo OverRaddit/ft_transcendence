@@ -30,6 +30,8 @@ services:
     ports:
       - "3000:3000"
       - "8000:8000"
+      # for chat socket
+      - "4242:4242"
     # expose:
     #   - "3000"
     #   - "8000"
