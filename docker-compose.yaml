@@ -9,19 +9,18 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1234
       POSTGRES_DB: ft_db
-
-    # temp setting...
     tty: true # 나중에 지울 것.
-    # ports:
-    #   - "5432:5432"
+    ports:
+      - "5432:5432"
     expose:
       - "5432"
     volumes:
       - type: bind
         source: ./table.sql
         target: /docker-entrypoint-initdb.d/table.sql
-    # env_file:
-    #   - ./.env
+      - type: bind
+        source: ./database
+        target: /var/lib/postgresql/data
     networks:
       - intra
   nest:
@@ -41,6 +40,11 @@ services:
     tty: true
     networks:
       - intra
+    volumes:
+      - type: bind
+        source: ./uploads
+        target: /app/backend/uploads
+
   react:
     container_name: react
     build: ./frontend
