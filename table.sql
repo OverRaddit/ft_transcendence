@@ -76,7 +76,7 @@ CREATE TABLE public.channel (
     kind integer,
     owner integer,
     roomname character varying(50),
-    roompassword character varying(50)
+    roompassword character varying(60)
 );
 
 
