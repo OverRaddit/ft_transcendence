@@ -23,6 +23,7 @@ NAME		=	pong
 $(NAME)			:
 	@echo $(YELLOW) "Composing docker system from docker-compose.yaml..." $(EOC)
 	@sh init.sh
+	@mkdir -p ./database ./backend/uploads
 	@docker-compose up --build
 #	@echo $(GREEN) "Docker compose complete!" $(EOC)
 

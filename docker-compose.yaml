@@ -43,7 +43,7 @@ services:
       - intra
     volumes:
       - type: bind
-        source: ./uploads
+        source: ./backend/uploads
         target: /app/backend/uploads
 
   react:
