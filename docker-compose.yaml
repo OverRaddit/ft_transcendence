@@ -10,8 +10,6 @@ services:
       POSTGRES_PASSWORD: 1234
       POSTGRES_DB: ft_db
     tty: true # 나중에 지울 것.
-    # ports:
-    #   - "5432:5432"
     expose:
       - "5432"
     volumes:
@@ -26,15 +24,10 @@ services:
   nest:
     container_name: nest
     build: ./backend
-    # ports:
-    #   - "3000:3000"
-    #   - "8000:8000"
-    #   # for chat socket
-    #   - "4242:4242"
-    expose:
-      - "3000"
-      - "8000"
-      - "4242"
+    ports:
+      - "3000:3000"
+      - "8000:8000"
+      - "4242:4242"
     depends_on:
       - react
       - postgres
@@ -49,10 +42,8 @@ services:
   react:
     container_name: react
     build: ./frontend
-    # ports:
-    #   - "3001:3001"
-    expose:
-      - "3001"
+    ports:
+      - "3001:3001"
     depends_on:
       - postgres
     tty: true
