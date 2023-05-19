@@ -36,8 +36,8 @@ services:
       - intra
     volumes:
       - type: bind
-        source: ./backend/uploads
-        target: /app/backend/uploads
+        source: ./uploads
+        target: /app/uploads
 
   react:
     container_name: react
